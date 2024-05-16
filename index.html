@@ -67,8 +67,8 @@
                         <div class="contact_list">
                             <!-- lista contatti -->
                             <div class="contact d-flex gap-sm align-center" 
-                            @click="activeContact(index)" 
-                            v-for="(contact, index) in contacts" :key="index">
+                            @click.stop="activeContact(contact)" 
+                            v-for="(contact, index) in filteredContacts" :key="index">
                                 <!-- contatto -->
                                 <div class="contact_image">
                                     <img class="image" :src="contact.avatar" alt="">

@@ -173,12 +173,28 @@ createApp({
 
         }
     },
+
     mounted() {
         console.log('vue ok')
+
     },
+
+    computed: {
+        filteredContacts() {
+            const searchInput = this.searchedContact.toLowerCase()
+            const filtered = this.contacts.filter((contact) => {
+                return contact.name.toLowerCase().includes(searchInput)
+            })
+            console.log(filtered)
+            return filtered
+        }
+    },
+
     methods: {
-        activeContact(index) {
+        activeContact(element) {
+            const index = this.contacts.indexOf(element)
             this.contactIndex = index
+            console.log(index)
         },
 
         sendNewMessage() {
@@ -197,7 +213,7 @@ createApp({
         },
 
         receivedMessage() {
-            if(this.timeOutInterval) {
+            if (this.timeOutInterval) {
                 clearInterval(this.timeOutInterval)
             }
 
