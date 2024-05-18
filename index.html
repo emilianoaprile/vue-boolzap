@@ -12,6 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/luxon@3.4.4/build/global/luxon.min.js"></script>
     <title>Boolzap</title>
 </head>
 
@@ -24,9 +25,9 @@
                     <header class="side_bar-header d-flex space-between align-center">
                         <!-- profilo utente -->
                         <div class="user_profile d-flex align-center gap-sm">
-                            <img class="image" src="./img/avatar_io.png" alt="">
+                            <img class="image" :src="userImgPath" alt="">
                             <div class="user_name">
-                                Sofia
+                                {{userName}}
                             </div>
                         </div>
                         <div class="icons_profile">
@@ -44,10 +45,10 @@
                             <i class="fa-solid fa-bell-slash"></i>
                         </div>
                         <div class="notification_text">
-                            <p class="notification_title">Ricevi notifiche di nuovi messaggi</p>
+                            <p class="notification_title text-md">Ricevi notifiche di nuovi messaggi</p>
 
                             <a class="notification_link" href="#">
-                                <p class="notification_link-text">Attiva notifiche desktop</p>
+                                <p class="notification_link-text text-sm">Attiva notifiche desktop</p>
                             </a>
                         </div>
                         <!-- fine sezione notifiche -->
@@ -64,9 +65,10 @@
                     </div>
                     <div class="contacts">
                         <!-- sezione contatti -->
-                        <div class="contact_list">
+                        <div class="contact_list" v-if="filteredContacts.length > 0">
                             <!-- lista contatti -->
-                            <div class="contact d-flex gap-sm align-center" 
+                            <div class="contact d-flex gap-sm align-center"
+                            :class="{active: index === contactIndex}" 
                             @click.stop="activeContact(contact)" 
                             v-for="(contact, index) in filteredContacts" :key="index">
                                 <!-- contatto -->
@@ -86,6 +88,9 @@
                             </div>
                             <!-- fine lista contatti -->
                         </div>
+                        <div class="empty_list" v-else>
+                            <p>Nessun contatto trovato</p>
+                        </div>
                         <!-- fine sezione contatti -->
                     </div>
                     <!-- fine side bar -->
@@ -97,6 +102,9 @@
                             <img class="image" :src="contacts[contactIndex].avatar" alt="">
                             <div class="user_name">
                                 {{contacts[contactIndex].name}}
+                                <div class="last_message">
+                                    <p>Ultimo messaggio oggi alle 12:00</p>
+                                </div>
                             </div>
                         </div>
                         <div class="icons_profile">
@@ -112,7 +120,7 @@
                         <ul class="messages d-flex gap-md">
                             <li class="message d-flex" :class="message.status" v-for="(message, index) in contacts[contactIndex].messages">
                                 <p>{{message.message}}</p>
-                                <p>{{message.date}}</p>
+                                <p class="time">{{message.date}}</p>
                             </li>
                         </ul>
                     </div>

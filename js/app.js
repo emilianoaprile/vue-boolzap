@@ -1,4 +1,6 @@
 const { createApp } = Vue
+const { DateTime } = luxon
+
 
 createApp({
     data() {
@@ -7,6 +9,8 @@ createApp({
             newMessage: '',
             timeOutInterval: null,
             searchedContact: '',
+            userName: 'Sofia',
+            userImgPath: './img/avatar_io.png',
             contacts: [
                 {
                     name: 'Michele',
@@ -183,26 +187,31 @@ createApp({
         filteredContacts() {
             const searchInput = this.searchedContact.toLowerCase()
             const filtered = this.contacts.filter((contact) => {
+                const name = contact.name.toLowerCase()
+                if(name.includes(searchInput)) {
+                    contact.visible = true
+                } else {
+                    contact.visible = false
+                }
                 return contact.name.toLowerCase().includes(searchInput)
             })
-            console.log(filtered)
             return filtered
         }
     },
 
     methods: {
-        activeContact(element) {
-            const index = this.contacts.indexOf(element)
+        activeContact(contact) {
+            const index = this.contacts.indexOf(contact)
             this.contactIndex = index
-            console.log(index)
         },
 
         sendNewMessage() {
 
             const trimmedMessage = this.newMessage.trim()
+            const date = DateTime.now()
 
             const messageObject = {
-                date: '20/03/2020 16:30:00',
+                date: date,
                 message: trimmedMessage.charAt(0).toUpperCase() + trimmedMessage.slice(1),
                 status: 'sent'
             }
@@ -228,5 +237,6 @@ createApp({
                 this.contacts[this.contactIndex].messages.push(messageObject)
             }, 1000)
         }
+
     },
 }).mount('#app')

@@ -96,25 +96,42 @@ img {
     padding-left: 40px;
     padding-right: 40px;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 .text_section {
     margin-top: auto;
 }
 
+.user_name {
+    font-weight: 500;
+}
+
+.fa-solid {
+    color: rgb(130, 130, 130);
+}
+
 
 /* SIDEBAR HEADER */
 .side_bar-header,
 .main_header {
-    padding: 5px 10px;
+    padding: 8px 10px;
     background-color: #eaeaea;
-    height: 65px;
-
 }
 
 .notifications {
-    padding: 5px 10px;
+    padding: 18px 10px;
     background-color: #8EDAFC;
+}
+
+.notification_link-text {
+    margin-top: 6px;
+    transition: 0.3s;
+}
+
+.notification_link-text:hover {
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .notification_icon {
@@ -176,6 +193,10 @@ img {
     border-top: 1px solid lightgrey;
 }
 
+.active {
+    background-color: lightgray;
+}
+
 .contacts {
     overflow-y: scroll;
 }
@@ -230,4 +251,27 @@ img {
 .text_section {
     padding: 10px 20px;
     background-color: rgb(234, 234, 234);
+}
+
+.empty_list {
+    text-align: center;
+    padding: 30px;
+}
+
+.text-md {
+    font-size: 15px;
+}
+
+.text-sm {
+    font-size: 13px;
+}
+
+.time {
+    font-size: 11px;
+}
+
+.last_message {
+    font-size: 12px;
+    margin-top: 5px;
+    color: rgb(60, 60, 60);
 }
