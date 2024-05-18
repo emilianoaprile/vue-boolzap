@@ -223,16 +223,22 @@ img {
     font-size: 13px;
     border-radius: 10px;
     gap: 10px;
+    position: relative;
+
 }
 
 .sent {
     align-self: flex-end;
     background-color: rgb(213, 249, 186);
+    box-shadow: -24px 25px 13px -9px rgba(0,0,0,0.1);
+
 }
 
 .received {
     background-color: white;
     align-self: flex-start;
+    box-shadow: 24px 25px 13px -9px rgba(0,0,0,0.1);
+
 }
 
 .text_input {
@@ -275,3 +281,32 @@ img {
     margin-top: 5px;
     color: rgb(60, 60, 60);
 }
+
+.drop_down-menu {
+    background-color: white;
+    padding: 20px 15px;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+
+}
+
+.drop_down-card {
+    position: absolute;
+    right: 12px;
+    top: 80%;
+    z-index: 999;
+    box-shadow: 0px 25px 14px -8px rgba(0,0,0,0.1);
+}
+
+.dropDown_item {
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete:hover {
+    color: red;
+}
+
+

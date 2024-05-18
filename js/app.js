@@ -9,6 +9,7 @@ createApp({
             newMessage: '',
             timeOutInterval: null,
             searchedContact: '',
+            dropDownIsVisible: false,
             userName: 'Sofia',
             userImgPath: './img/avatar_io.png',
             contacts: [
@@ -180,6 +181,11 @@ createApp({
 
     mounted() {
         console.log('vue ok')
+        this.contacts.forEach(contact => {
+            contact.messages.forEach(message => {
+                message.dropDownIsVisible = false;
+            });
+        });
 
     },
 
@@ -188,7 +194,7 @@ createApp({
             const searchInput = this.searchedContact.toLowerCase()
             const filtered = this.contacts.filter((contact) => {
                 const name = contact.name.toLowerCase()
-                if(name.includes(searchInput)) {
+                if (name.includes(searchInput)) {
                     contact.visible = true
                 } else {
                     contact.visible = false
@@ -206,7 +212,6 @@ createApp({
         },
 
         sendNewMessage() {
-
             const trimmedMessage = this.newMessage.trim()
             const date = DateTime.now()
 
@@ -236,6 +241,21 @@ createApp({
 
                 this.contacts[this.contactIndex].messages.push(messageObject)
             }, 1000)
+        },
+
+        showDropDown(message) {
+            if (message.dropDownIsVisible) {
+                message.dropDownIsVisible = false
+            } else {
+                this.contacts[this.contactIndex].messages.forEach((msg) => {
+                    msg.dropDownIsVisible = this.dropDownIsVisible
+                })
+                message.dropDownIsVisible = true
+            }            
+        },
+
+        deleteMessage(index) {
+            this.contacts[this.contactIndex].messages.splice(index, 1)
         }
 
     },

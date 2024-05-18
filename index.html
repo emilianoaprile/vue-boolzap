@@ -118,9 +118,20 @@
                     <div class="chat">
                         <!-- chat con messaggi -->
                         <ul class="messages d-flex gap-md">
-                            <li class="message d-flex" :class="message.status" v-for="(message, index) in contacts[contactIndex].messages">
+                            <li class="message d-flex" 
+                            :class="message.status" 
+                            v-for="(message, index) in contacts[contactIndex].messages">
                                 <p>{{message.message}}</p>
-                                <p class="time">{{message.date}}</p>
+                                <p class="time">12:00</p>
+                                <div class="drop_down" @click.stop="showDropDown(message)">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                                <div class="drop_down-card" v-if="message.dropDownIsVisible">
+                                    <ul class="drop_down-menu d-flex">
+                                        <li class="dropDown_item" >Info Messaggio</li>
+                                        <li class="dropDown_item delete"  @click.stop="deleteMessage(index)">Elimina Messaggio</li>
+                                    </ul>
+                                </div>
                             </li>
                         </ul>
                     </div>
